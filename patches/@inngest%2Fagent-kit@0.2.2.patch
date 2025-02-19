@@ -1,0 +1,13 @@
+diff --git a/dist/adapters/openai.js b/dist/adapters/openai.js
+index 8e9b7747f0d70c316a82edb3d09ffef351995d46..818b548a2c174faa4e91d04797f9672c1816082f 100644
+--- a/dist/adapters/openai.js
++++ b/dist/adapters/openai.js
+@@ -59,7 +59,7 @@ const requestParser = (model, messages, tools, tool_choice = "auto") => {
+                     name: t.name,
+                     description: t.description,
+                     parameters: t.parameters && (0, openai_zod_to_json_schema_1.zodToJsonSchema)(t.parameters),
+-                    strict: true,
++                    strict: Boolean(t.parameters),
+                 },
+             };
+         });

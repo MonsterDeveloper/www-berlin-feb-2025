@@ -1,0 +1,48 @@
+{
+  "name": "www-berlin-feb-2025",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "db:touch": "wrangler d1 execute honc-d1-database --local --command='SELECT 1'",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "wrangler d1 migrations apply honc-d1-database --local",
+    "db:migrate:prod": "ENVIRONMENT=production drizzle-kit migrate",
+    "db:seed": "tsx seed.ts",
+    "db:seed:prod": "ENVIRONMENT=production tsx seed.ts",
+    "db:setup": "npm run db:touch && npm run db:generate && npm run db:migrate && npm run db:seed",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push",
+    "inngest:dev": "inngest dev"
+  },
+  "dependencies": {
+    "@fiberplane/hono": "0.4.2",
+    "@inngest/agent-kit": "^0.2.2",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.39.3",
+    "grammy": "^1.35.0",
+    "hono": "^4.7.0",
+    "inngest": "^3.31.9",
+    "nanoid": "^5.1.0",
+    "typescript-event-target": "^1.1.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@cloudflare/workers-types": "^4.20250204.0",
+    "@cto_of_everything/biome-config": "^1.1.4",
+    "@fiberplane/hono-otel": "^0.6.2",
+    "@libsql/client": "^0.14.0",
+    "drizzle-kit": "^0.30.4",
+    "drizzle-seed": "^0.3.1",
+    "inngest-cli": "^1.4.6",
+    "tsx": "^4.19.2",
+    "typescript": "^5.5.4",
+    "wrangler": "^3.107.3"
+  },
+  "trustedDependencies": [
+    "inngest-cli"
+  ],
+  "patchedDependencies": {
+    "@inngest/agent-kit@0.2.2": "patches/@inngest%2Fagent-kit@0.2.2.patch"
+  }
+}
