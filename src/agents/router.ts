@@ -53,7 +53,7 @@ export function createRouterAgent({
     name: "Default routing agent",
 
     model: openai({
-      model: "gpt-4o",
+      model: "gpt-4",
       apiKey: honoContext.env.OPENAI_API_KEY,
     }),
 
@@ -138,7 +138,7 @@ export function createRouterAgent({
       createTool({
         name: "done",
         description:
-          "Finalize the conversation when a message contains a final and formatted text response for the user.",
+          "Finalize the conversation when the last message contains a final and formatted text response for the user. This response should be prepared by the executive director agent.",
         // biome-ignore lint/suspicious/noEmptyBlockStatements: we're just using this as a signal
         handler: () => {},
       }),

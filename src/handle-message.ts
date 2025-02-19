@@ -158,7 +158,7 @@ export const handleMessage = inngest.createFunction(
           lastMessage.type === "text" &&
           !Array.isArray(lastMessage.content)
           ? lastMessage.content
-          : "look in the console",
+          : "Request completed",
         { parse_mode: "HTML" },
       )
 

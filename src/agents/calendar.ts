@@ -86,7 +86,7 @@ export function createCalendarAgent({
             .describe(
               "The end time of the event. A combined date-time value (formatted according to RFC3339).",
             ),
-          description: z.string().describe("The description of the event."),
+          summary: z.string().describe("The title of the event."),
         }),
       })
       .strict(),
@@ -100,7 +100,7 @@ export function createCalendarAgent({
         end: {
           dateTime: event.end,
         },
-        description: event.description,
+        summary: event.summary,
       })
 
       return createdEvent
@@ -111,7 +111,7 @@ export function createCalendarAgent({
     name: "Google Calendar agent",
     description: "Manages Google Calendar events",
     system: `You are a helpful assistant that can manage Google Calendar events. Current date and time is: ${new Date().toISOString()} (${new Date().toLocaleString("en-US", { weekday: "long" })}). Timezone: UTC+1 Europe/Berlin. Week starts on Monday.`,
-    tools: [getCalendarsTool, getEventsTool],
+    tools: [getCalendarsTool, getEventsTool, createEventTool],
     model: openai({
       model: "gpt-4o-mini",
       apiKey: honoContext.env.OPENAI_API_KEY,
